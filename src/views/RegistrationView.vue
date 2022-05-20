@@ -1,4 +1,6 @@
 <template>
+<div>
+<Header/>
   <div class="container">
     <div class="wrapper m-auto">
       <form>
@@ -26,13 +28,17 @@
       </form>
     </div>
   </div>
+</div>
 </template>
 
 <script>
   import {ref,onMounted} from 'vue'
   import { useStore } from 'vuex';
   import { useRouter, useRoute } from 'vue-router'
+import Header from '../components/Header.vue';
     export default {
+  components: { Header },
+
         setup(){
           const store = useStore();
           const router = useRouter()

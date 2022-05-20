@@ -45,6 +45,7 @@ import { onMounted,computed, ref } from '@vue/runtime-core'
         setup(){
             const store = useStore()
             const route = useRoute();
+            const router = useRouter()
             let productData = ref({
                 category:"",
                 description:"",
@@ -71,6 +72,10 @@ import { onMounted,computed, ref } from '@vue/runtime-core'
             })
             const updateProduct = ()=>{
                 store.commit('setUpdatedProduct',data._value);
+                router.push({
+                    name:'home'
+                })
+
             }
             return{
                 data,

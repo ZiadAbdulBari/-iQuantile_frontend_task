@@ -1,4 +1,6 @@
 <template>
+<div>
+    <Header/>
     <div class="container">
         <div class="cart-product">
             <div v-for="(data,i) in cartData" :key="i">
@@ -13,10 +15,13 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
+import Header from '../components/Header.vue';
     export default {
+  components: { Header },
         setup(){
             const cartData = JSON.parse(localStorage.getItem('cart'));
             return{
