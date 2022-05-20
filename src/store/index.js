@@ -41,15 +41,24 @@ const store = createStore({
         ],
         cartData:[],
     },
+    actions:{
+        setProductData({commit}){
+            commit('setProductDataToLocalStorage');
+        }
+    },
     mutations: {
+        setProductDataToLocalStorage(state){
+            localStorage.setItem('allProducts',JSON.stringify(state.allProducts))
+        },
         setUserInfo(state,payload) {
             let data = JSON.parse(localStorage.getItem('userData'));
             state.userSignup = data;
         },
         setUpdatedProduct(state,value){
-            let data = state.allProducts.findIndex((p)=>p.productId==value.productId);
-            state.allProducts[data]=value;
-            localStorage.setItem('productData', JSON.stringify(state.allProducts))
+            let allProducts = JSON.parse(localStorage.getItem('allProducts'));
+            let data = allProducts.findIndex((p)=>p.productId==value.productId);
+            allProducts[data]=value;
+            localStorage.setItem('allProducts', JSON.stringify(state.allProducts))
         }
     }
 })

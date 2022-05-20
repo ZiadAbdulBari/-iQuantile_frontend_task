@@ -29,8 +29,11 @@ import Header from '../components/Header.vue';
   components: { Header },
     setup(){
       const store = useStore()
-      const data = computed(() => store.state.allProducts)
+      let data=ref([]);
 
+      const getProductData = ()=>{
+        data.value = JSON.parse(localStorage.getItem('allProducts'));
+      }
       const addToCart = (product)=>{
         let cart = JSON.parse(localStorage.getItem('cart'));
         console.log("==",cart)
@@ -50,6 +53,10 @@ import Header from '../components/Header.vue';
           localStorage.setItem('cart',JSON.stringify(cart))
         }
       }
+      onMounted(()=>{
+        getProductData();
+        
+      })
       return{
         data,
         addToCart,

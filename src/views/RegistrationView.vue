@@ -78,12 +78,10 @@ import Header from '../components/Header.vue';
             }
             userSignup._rawValue.id=1;
             console.log(userSignup._rawValue);
-            // let allProduct = ref([])
             localStorage.setItem('userData',JSON.stringify(userSignup._rawValue));
             const cart = ref([])
-            localStorage.setItem('cart',JSON.stringify(cart._rawValue))
-            // localStorage.setItem('allProduct',JSON.stringify(allProduct._rawValue));
-            // store.commit('setUserInfo');
+            localStorage.setItem('cart',JSON.stringify(cart._rawValue));
+            store.dispatch('setProductData');
             router.push({
               name:'login'
               }); 
