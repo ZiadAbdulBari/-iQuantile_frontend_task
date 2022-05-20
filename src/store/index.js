@@ -55,10 +55,11 @@ const store = createStore({
             state.userSignup = data;
         },
         setUpdatedProduct(state,value){
-            let allProducts = JSON.parse(localStorage.getItem('allProducts'));
-            let data = allProducts.findIndex((p)=>p.productId==value.productId);
-            allProducts[data]=value;
-            localStorage.setItem('allProducts', JSON.stringify(state.allProducts))
+            console.log(value);
+            let products = JSON.parse(localStorage.getItem('allProducts'));
+            let data = products.findIndex((p)=>p.productId==value.productId);
+            products[data]=value;
+            localStorage.setItem('allProducts', JSON.stringify(products))
         }
     }
 })
