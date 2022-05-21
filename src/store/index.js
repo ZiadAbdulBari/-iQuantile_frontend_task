@@ -55,7 +55,6 @@ const store = createStore({
             state.userSignup = data;
         },
         setUpdatedProduct(state,value){
-            console.log(value);
             let products = JSON.parse(localStorage.getItem('allProducts'));
             let data = products.findIndex((p)=>p.productId==value.productId);
             products[data]=value;

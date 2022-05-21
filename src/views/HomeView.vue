@@ -30,27 +30,28 @@ import Header from '../components/Header.vue';
     setup(){
       const store = useStore()
       let data=ref([]);
+      let cart = ref([]);
 
       const getProductData = ()=>{
         data.value = JSON.parse(localStorage.getItem('allProducts'));
       }
+
       const addToCart = (product)=>{
-        let cart = JSON.parse(localStorage.getItem('cart'));
-        console.log("==",cart)
-        cart.push(product);
-        if(cart.lenght>0){
-          const isAvailable = cart.find((p)=>p.productId==product.productId)
+        // cart.value = JSON.parse(localStorage.getItem('cart'));
+        cart._rawValue=JSON.parse(localStorage.getItem('cart'))
+        if(cart._rawValue.length>0){
+          const isAvailable = cart._rawValue.find((p)=>p.productId==product.productId)
           if(isAvailable){
-            console.log("already ase");
+            console.log("Already available");
           }
           else{
-            cart.push(product);
-            localStorage.setItem('cart',JSON.stringify(cart))
+            cart._rawValue.push(product);
+            localStorage.setItem('cart',JSON.stringify(cart._rawValue))
           }
         }
         else{
-          cart.push(product);
-          localStorage.setItem('cart',JSON.stringify(cart))
+          cart._rawValue.push(product);
+          localStorage.setItem('cart',JSON.stringify(cart._rawValue))
         }
       }
       onMounted(()=>{

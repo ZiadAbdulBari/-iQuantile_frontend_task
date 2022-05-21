@@ -58,6 +58,7 @@ import { onMounted, ref } from '@vue/runtime-core'
             })
             const getProductData = ()=>{
                 data.value = JSON.parse(localStorage.getItem('allProducts'));
+                console.log(data.value)
                 let product = data._rawValue.find((p)=>p.productId==route.params.id)
                 
                 productData._value.category=product.category
