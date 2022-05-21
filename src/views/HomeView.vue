@@ -72,5 +72,6 @@ import Header from '../components/Header.vue';
   row-gap:10px;
   column-gap:10px;
   margin-top: 20px;
+  flex-wrap:wrap;
 }
 </style>
