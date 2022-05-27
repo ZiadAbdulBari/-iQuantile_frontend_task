@@ -6,25 +6,26 @@
       <form>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Name</label>
-          <input v-model="userSignup.name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+          <input v-model="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text text-danger" v-if="nameError!=''">{{nameError}}</div>
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email</label>
-          <input  v-model="userSignup.email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+          <input  v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text text-danger" v-if="emailError!=''">{{emailError}}</div>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input v-model="userSignup.password" type="password" class="form-control" id="exampleInputPassword1">
+          <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
+          <div id="emailHelp" class="form-text text-danger" v-if="passwordError!=''">{{passwordError}}</div>
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Confirm Password</label>
-          <input v-model="userSignup.confirmPassword" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+          <input v-model="confirmPassword" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text text-danger" v-if="confirmPasswordError!=''">{{confirmPasswordError}}</div>
         </div>
         
-        <button @click="signup()" type="submit" class="btn btn-primary">Signup</button>
+        <button @click.prevent="signup()" type="submit" class="btn btn-primary">Signup</button>
       </form>
     </div>
   </div>
@@ -32,7 +33,7 @@
 </template>
 
 <script>
-  import {ref,onMounted} from 'vue'
+  import {reactive,onMounted, toRefs,ref} from 'vue'
   import { useStore } from 'vuex';
   import { useRouter, useRoute } from 'vue-router'
 import Header from '../components/Header.vue';
@@ -43,28 +44,36 @@ import Header from '../components/Header.vue';
           const store = useStore();
           const router = useRouter()
           const route = useRoute()
-          let userSignup=ref({
-            id:'',
-            name:'',
-            email:'',
-            password:'',
-            confirmPassword:''
+          let userSignup=reactive({
+              id:'',
+              name:'',
+              email:'',
+              password:'',
+              confirmPassword:''
+            
           });
+          let errorMgs=reactive({
+            nameError:'',
+            emailError:'',
+            passwordError:'',
+            confirmPasswordError:'',
+          })
           const signupFormValidation = ()=>{
-            if(userSignup._rawValue.name.length<3){
-              console.log("Write valid name");
+            if(userSignup.name.length<3){
+              errorMgs.nameError = 'Name should be 3 charecters.';
+              return false;
+
+            }
+            if(userSignup.email.length<3){
+              errorMgs.emailError = 'Please provide a valid email.';
               return false;
             }
-            if(userSignup._rawValue.email.length<3){
-              console.log("Write valid email");
+            if(!(/[a-z]/.test(userSignup.password) && /[A-Z]/.test(userSignup.password) && /[0-9]/.test(userSignup.password))){
+              errorMgs.passwordError = 'Password should be contain atleast one uppercase,lowercase and number.';
               return false;
             }
-            if(!(/[a-z]/.test(userSignup._rawValue.password) && /[A-Z]/.test(userSignup._rawValue.password) && /[0-9]/.test(userSignup._rawValue.password))){
-              console.log("Write valid password");
-              return false;
-            }
-            if(userSignup._rawValue.password!=userSignup._rawValue.confirmPassword){
-              console.log("Write valid confirm password");
+            if(userSignup.password!=userSignup.confirmPassword){
+              errorMgs.comfirmPasswordError = 'Password did not matched';
               return false;
             }
             else{
@@ -76,9 +85,10 @@ import Header from '../components/Header.vue';
             if(!signupFormValidation()){
               return false
             }
-            userSignup._rawValue.id=1;
-            console.log(userSignup._rawValue);
-            localStorage.setItem('userData',JSON.stringify(userSignup._rawValue));
+
+            userSignup.id=1;
+            console.log(userSignup);
+            localStorage.setItem('userData',JSON.stringify(userSignup));
             const cart = ref([])
             localStorage.setItem('cart',JSON.stringify(cart._rawValue));
             store.dispatch('setProductData');
@@ -90,7 +100,8 @@ import Header from '../components/Header.vue';
           //   test()
           //   })
           return{
-            userSignup,
+            ...toRefs(userSignup),
+            ...toRefs(errorMgs),
             signup,
           }
         }

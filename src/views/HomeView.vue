@@ -1,18 +1,43 @@
 <template>
 <div>
   <Header/>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="../assets/images/banner2.avif" class="d-block" alt="..." style="width:100vw;height:95vh">
+        </div>
+        <div class="carousel-item">
+          <img src="../assets/images/banner.avif" class="d-block" alt="..." style="width:100vw;height:95vh">
+        </div>
+        <div class="carousel-item">
+          <img src="../assets/images/banner3.avif" class="d-block" alt="..." style="width:100vw;height:95vh">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   <div class="container">
+    <div class="category">
+
+    </div>
     <div class="all-product">
 
     <div v-for="(product,i) in data" :key="i">
       <div class="card" style="width: 18rem;">
+        <img class="card-img-top" :src="product.photoUrl" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{product.title}}</h5>
-          <p class="card-text">{{product.description}}</p>
+          <!-- <p class="card-text">{{product.description}}</p> -->
           <p class="card-text">Category: {{product.category}}</p>
           <p class="card-text">Price: {{product.price}}</p>
-          <button @click.prevent="addToCart(product)" class="btn btn-primary">Add to cart</button>
-          <router-link :to="'/update/'+ product.productId" class="btn btn-primary">Update Product</router-link>
+          <button @click.prevent="addToCart(product)" class="btn">Add to cart</button>
+          <router-link :to="'/update/'+ product.productId" class="btn">Update Product</router-link>
         </div>
       </div>
     </div>
@@ -34,6 +59,7 @@ import Header from '../components/Header.vue';
 
       const getProductData = ()=>{
         data.value = JSON.parse(localStorage.getItem('allProducts'));
+        console.log(data);
       }
 
       const addToCart = (product)=>{

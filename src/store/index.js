@@ -13,6 +13,7 @@ const store = createStore({
         allProducts:[
             {
                 category:"Men",
+                photoUrl:"https://unsplash.com/photos/GlgDs6_WhTg",
                 description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborumnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentiumoptio, eaque rerum! Provident similique accusantium nemo autem.",
                 price:100,
                 productId:1,
@@ -22,6 +23,7 @@ const store = createStore({
             },
             {
                 category:"Women",
+                photoUrl:"https://unsplash.com/photos/GlgDs6_WhTg",
                 description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborumnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentiumoptio, eaque rerum! Provident similique accusantium nemo autem.",
                 price:150,
                 productId:2,
@@ -31,6 +33,7 @@ const store = createStore({
             },
             {
                 category:"Kid",
+                photoUrl:"https://unsplash.com/photos/GlgDs6_WhTg",
                 description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborumnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentiumoptio, eaque rerum! Provident similique accusantium nemo autem.",
                 price:250,
                 productId:3,
