@@ -24,8 +24,9 @@
           <input v-model="confirmPassword" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           <div id="emailHelp" class="form-text text-danger" v-if="confirmPasswordError!=''">{{confirmPasswordError}}</div>
         </div>
-        
-        <button @click.prevent="signup()" type="submit" class="btn btn-primary">Signup</button>
+        <div class="text-center">
+          <button @click.prevent="signup()" type="submit" class="btn border-dark">Signup</button>
+        </div>
       </form>
     </div>
   </div>
