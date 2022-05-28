@@ -86,10 +86,10 @@ import Header from '../components/Header.vue';
             if(!signupFormValidation()){
               return false
             }
-
             userSignup.id=1;
             console.log(userSignup);
             localStorage.setItem('userData',JSON.stringify(userSignup));
+            localStorage.setItem('isLoggedin',JSON.stringify(true));
             const cart = ref([])
             localStorage.setItem('cart',JSON.stringify(cart._rawValue));
             store.dispatch('setProductData');

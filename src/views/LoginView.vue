@@ -2,26 +2,27 @@
 <div>
     <Header/>
     <div class="container">
-        <div class="wrapper">
-
+        <div class="wrapper m-auto">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text text-danger" v-if="emailError!=''">{{emailError}}</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
+                    <div id="emailHelp" class="form-text text-danger" v-if="passwordError!=''">{{passwordError}}</div>
+                </div>
+                <button type="submit" @click.prevent="login()" class="btn btn-primary">Submit</button>
+            </form>
         </div>
-        <form>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <button type="submit" @click="login()" class="btn btn-primary">Submit</button>
-        </form>
     </div>
 </div>
 </template>
 
 <script>
-    import { ref } from '@vue/reactivity'
+    import { ref,reactive,toRefs } from '@vue/reactivity'
     import { useRouter, useRoute } from 'vue-router'
 import Header from '../components/Header.vue';
     export default {
@@ -30,25 +31,37 @@ import Header from '../components/Header.vue';
         setup(){
             let email = ref('');
             let password = ref('');
+            let userData = JSON.parse(localStorage.getItem('userData'));
+            let errorMgs=reactive({
+            emailError:'',
+            passwordError:'',
+          })
             const router = useRouter()
             const route = useRoute()
-            let userData = JSON.parse(localStorage.getItem('userData'));
-            
-            const login = ()=>{
-                if(userData.email==email._value && userData.password==password._value){
-                    localStorage.setItem('isLoggedin',JSON.stringify(true));
-                    router.push({
-                        name:'home'
-                    })
+            const signinFormValidation = ()=>{
+                if(userData.email!=email.value){
+                    errorMgs.emailError = 'Invalid email.';
+                    return false;
+                }
+                if(userData.password!=password.value){
+                    errorMgs.passwordError = 'Invalid password.';
+                    return false;
                 }
                 else{
-                    console.log(userData.email, email)
-                    console.log(userData.password, password)
-                    console.log('pls provite valid credincial')
+                    return true
                 }
-                return false
+            }
+            const login = ()=>{
+                if(!signinFormValidation()){
+                    return false;
+                }
+                localStorage.setItem('isLoggedin',JSON.stringify(true));
+                router.push({
+                    name:'home'
+                })
             }
             return{
+                ...toRefs(errorMgs),
                 userData,
                 email,
                 password,
