@@ -56,6 +56,7 @@ import Header from '../components/Header.vue';
                     return false;
                 }
                 localStorage.setItem('isLoggedin',JSON.stringify(true));
+                store.dispatch('setProductData');
                 router.push({
                     name:'home'
                 })
