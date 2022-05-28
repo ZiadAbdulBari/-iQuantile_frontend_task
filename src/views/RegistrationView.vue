@@ -74,7 +74,7 @@ import Header from '../components/Header.vue';
               return false;
             }
             if(userSignup.password!=userSignup.confirmPassword){
-              errorMgs.comfirmPasswordError = 'Password did not matched';
+              errorMgs.confirmPasswordError = 'Password did not matched';
               return false;
             }
             else{
@@ -94,7 +94,7 @@ import Header from '../components/Header.vue';
             localStorage.setItem('cart',JSON.stringify(cart._rawValue));
             store.dispatch('setProductData');
             router.push({
-              name:'login'
+              name:'home'
               }); 
           }
           // onMounted(()=>{
