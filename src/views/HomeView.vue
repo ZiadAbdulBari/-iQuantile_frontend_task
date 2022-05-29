@@ -27,7 +27,6 @@
 
     </div>
     <div class="all-product">
-
     <div v-for="(product,i) in data" :key="i">
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" :src="product.photoUrl" alt="Card image cap">
