@@ -5,13 +5,13 @@
         <div class="cart-product m-auto mt-2">
             <div v-for="(data,i) in cartData" :key="i">
                 <div class="d-flex justify-content-between align-self-center ps-4 pe-4 pt-4 pb-4 bg-light mb-2 rounded">
-                    <div>
-                        <img :src="data.photoUrl" alt="" class="cart-thumpnale">
+                    <div class="cart-thumpnale">
+                        <img :src="data.photoUrl" alt="" class="rounded">
                     </div>
-                    <div>
+                    <div class="product-name">
                         <h5>{{data.title}}</h5>
                     </div>
-                    <div class="d-flex">
+                    <div class="d-flex quantity">
                         <div>
                             <button @click.prevent="changeQuantity('increment',data.productId,data.quentity)">
                                 +
@@ -26,7 +26,7 @@
                             </button>
                         </div>
                     </div>
-                    <div>
+                    <div class="price">
                         <h5>{{data.totalPrice}}BDT</h5>
                     </div>
                     <div @click.prevent="deleteFromCart(data.productId)">
@@ -97,5 +97,14 @@
     }
     .cart-thumpnale{
         width: 100px;
+    }
+    .cart-thumpnale img{
+        width: 100%;
+    }
+    .product-name{
+        width: 250px;
+    }
+    .quantity{
+        width: 150px;
     }
 </style>
