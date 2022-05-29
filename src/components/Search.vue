@@ -45,7 +45,7 @@ import { useRoute, useRouter } from 'vue-router';
             let cart = ref([]);
 
             const searchProduct = ()=>{
-                searchProducts.value = product.value.filter(p=>p.title.includes(searchkey.value))
+                searchProducts.value = product.value.filter(p=>p.title.toLowerCase().includes(searchkey.value.toLowerCase()))
             }
             const addToCart = (product)=>{
                 cart.value =JSON.parse(localStorage.getItem('cart'))
