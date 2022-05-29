@@ -24,7 +24,9 @@
 <script>
     import { ref,reactive,toRefs } from '@vue/reactivity'
     import { useRouter, useRoute } from 'vue-router'
-import Header from '../components/Header.vue';
+    import { useStore } from 'vuex';
+
+    import Header from '../components/Header.vue';
     export default {
   components: { Header },
 
@@ -38,6 +40,7 @@ import Header from '../components/Header.vue';
           })
             const router = useRouter()
             const route = useRoute()
+            const store = useStore()
             const signinFormValidation = ()=>{
                 if(userData.email!=email.value){
                     errorMgs.emailError = 'Invalid email.';
@@ -57,6 +60,8 @@ import Header from '../components/Header.vue';
                 }
                 localStorage.setItem('isLoggedin',JSON.stringify(true));
                 store.dispatch('setProductData');
+                const cart = ref([])
+                localStorage.setItem('cart',JSON.stringify(cart.value));
                 router.push({
                     name:'home'
                 })

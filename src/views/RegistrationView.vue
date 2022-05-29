@@ -91,7 +91,7 @@ import Header from '../components/Header.vue';
             localStorage.setItem('userData',JSON.stringify(userSignup));
             localStorage.setItem('isLoggedin',JSON.stringify(true));
             const cart = ref([])
-            localStorage.setItem('cart',JSON.stringify(cart._rawValue));
+            localStorage.setItem('cart',JSON.stringify(cart.value));
             store.dispatch('setProductData');
             router.push({
               name:'home'
