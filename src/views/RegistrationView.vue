@@ -46,12 +46,13 @@ import Header from '../components/Header.vue';
           const router = useRouter()
           const route = useRoute()
           let userSignup=reactive({
-              id:'',
-              name:'',
-              email:'',
-              password:'',
-              confirmPassword:''
-            
+            id:'',
+            name:'',
+            email:'',
+            address:'',
+            password:'',
+            confirmPassword:'',
+            contactNumber:'',
           });
           let errorMgs=reactive({
             nameError:'',
@@ -87,12 +88,12 @@ import Header from '../components/Header.vue';
               return false
             }
             userSignup.id=1;
-            console.log(userSignup);
+            store.commit('setUserInfo');
             localStorage.setItem('userData',JSON.stringify(userSignup));
             localStorage.setItem('isLoggedin',JSON.stringify(true));
             const cart = ref([])
             localStorage.setItem('cart',JSON.stringify(cart.value));
-            store.dispatch('setProductData');
+            // store.dispatch('setProductData');
             router.push({
               name:'home'
               }); 

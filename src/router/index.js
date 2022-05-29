@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import RegistrationView from '../views/RegistrationView.vue';
 import LoginView from '../views/LoginView.vue';
 import CartView from '../views/CartView.vue';
-import UpdateProductView from '../views/UpdateProductView.vue';
+import UpdateProfileView from '../views/UpdateProfileView.vue';
 import SearchView from '../views/SearchView.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,9 +29,9 @@ const router = createRouter({
       component:CartView
     },
     {
-      path: '/update/:id',
+      path: '/update/',
       name: 'update',
-      component:UpdateProductView
+      component:UpdateProfileView
     },
     {
       path: '/search/:slug',

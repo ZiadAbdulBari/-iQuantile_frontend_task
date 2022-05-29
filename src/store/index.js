@@ -120,7 +120,7 @@ const store = createStore({
         setProductDataToLocalStorage(state){
             localStorage.setItem('allProducts',JSON.stringify(state.allProducts))
         },
-        setUserInfo(state,payload) {
+        setUserInfo(state) {
             let data = JSON.parse(localStorage.getItem('userData'));
             state.userSignup = data;
         },
