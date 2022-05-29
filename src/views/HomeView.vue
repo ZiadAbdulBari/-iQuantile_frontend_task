@@ -63,21 +63,20 @@ import Footer from '../components/Footer.vue';
       }
 
       const addToCart = (product)=>{
-        // cart.value = JSON.parse(localStorage.getItem('cart'));
-        cart._rawValue=JSON.parse(localStorage.getItem('cart'))
-        if(cart._rawValue.length>0){
-          const isAvailable = cart._rawValue.find((p)=>p.productId==product.productId)
+        cart.value=JSON.parse(localStorage.getItem('cart'))
+        if(cart.value.length>0){
+          const isAvailable = cart.value.find((p)=>p.productId==product.productId)
           if(isAvailable){
             console.log("Already available");
           }
           else{
-            cart._rawValue.push(product);
-            localStorage.setItem('cart',JSON.stringify(cart._rawValue))
+            cart.value.push(product);
+            localStorage.setItem('cart',JSON.stringify(cart.value))
           }
         }
         else{
-          cart._rawValue.push(product);
-          localStorage.setItem('cart',JSON.stringify(cart._rawValue))
+          cart.value.push(product);
+          localStorage.setItem('cart',JSON.stringify(cart.value))
         }
       }
       onMounted(()=>{

@@ -34,7 +34,7 @@ const router = createRouter({
       component:UpdateProductView
     },
     {
-      path: '/search',
+      path: '/search/:slug',
       name: 'search',
       component:SearchView
     },

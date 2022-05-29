@@ -17,36 +17,13 @@
             </div>
             <div class="search-item">
                 <div class="search-product">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" alt="...">
+                    <div class="card" style="width: 18rem;" v-for="(product,i) in searchProducts" :key="i">
+                        <img class="card-img-top" :src="product.photoUrl" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn">Go somewhere</a>
+                            <h5 class="card-title">{{product.title}}</h5>
+                            <p class="card-text">Category: {{product.category}}</p>
+                            <p class="card-text">Price: {{product.price}}</p>
+                            <button @click.prevent="addToCart(product)" class="btn border border-dark">Add to cart</button>
                         </div>
                     </div>
                 </div>
@@ -56,8 +33,47 @@
 </template>
 
 <script>
+    import {onMounted, ref,} from 'vue';
+import { useRoute, useRouter } from 'vue-router';
     export default {
-        
+        setup(){
+            const router = useRouter()
+            const route = useRoute()
+            let searchkey = ref(route.params.slug);
+            let product = ref(JSON.parse(localStorage.getItem('allProducts')))
+            let searchProducts = ref([]);
+            let cart = ref([]);
+
+            const searchProduct = ()=>{
+                searchProducts.value = product.value.filter(p=>p.title.includes(searchkey.value))
+            }
+            const addToCart = (product)=>{
+                cart.value =JSON.parse(localStorage.getItem('cart'))
+                if(cart.value.length>0){
+                const isAvailable = cart.value.find((p)=>p.productId==product.productId)
+                if(isAvailable){
+                    console.log("Already available");
+                }
+                else{
+                    cart.value.push(product);
+                    localStorage.setItem('cart',JSON.stringify(cart.value))
+                }
+                }
+                else{
+                cart.value.push(product);
+                localStorage.setItem('cart',JSON.stringify(cart.value))
+                }
+            }
+            onMounted(()=>{
+                searchProduct();
+            })
+            return{
+                addToCart,
+                searchkey,
+                product,
+                searchProducts,
+            }
+        }
     }
 </script>
 
