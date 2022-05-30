@@ -81,16 +81,12 @@ import Footer from '../components/Footer.vue';
           else{
             cart.value.push(product);
             localStorage.setItem('cart',JSON.stringify(cart.value))
-            // toast.mgs = "Successfully added"
-            // toast.type = "success"
             toastMgs('success');
           }
         }
         else{
           cart.value.push(product);
           localStorage.setItem('cart',JSON.stringify(cart.value))
-          // toast.mgs = "Successfully added"
-          // toast.type = "success"
           toastMgs('success');
         }
       }
@@ -101,6 +97,10 @@ import Footer from '../components/Footer.vue';
         }
         else if(mgsType=='success'){
           toast.mgs = "Successfully added"
+          toast.type = mgsType
+        }
+        else if(mgsType=='error'){
+          toast.mgs = "Error"
           toast.type = mgsType
         }
         setTimeout(()=>{

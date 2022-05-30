@@ -38,16 +38,25 @@
             </div>
         </div>
     </div>
+    <div class="toast-wrapper" v-if="mgs!=''">
+        <div class="toast-mgs" :class="{ 'success': type=='success','warning': type=='info'}">
+            <p>{{mgs}}</p>
+        </div>
+  </div>
 </div>
 </template>
 
 <script>
     import Header from '../components/Header.vue';
-    import {onMounted, ref} from 'vue';
+    import {onMounted, ref,reactive,toRefs} from 'vue';
     export default {
         components: { Header },
         setup(){
             let cartData = ref([]);
+            let toast = reactive({
+                mgs:'',
+                type:'',
+            })
             cartData.value = JSON.parse(localStorage.getItem('cart'));
             
             const changeQuantity=(status,productId,quantity)=>{
@@ -60,7 +69,6 @@
                         productQuantity--;
                     }
                 }
-                
                 let index = cartData.value.findIndex((p)=>p.productId==productId);
                 let data = cartData.value[index]
                 data.quentity = productQuantity;
@@ -69,15 +77,34 @@
                 localStorage.setItem('cart',JSON.stringify(cartData.value));
             }
             const deleteFromCart=(productId)=>{
-                console.log(productId);
                 let data = cartData.value.filter(p=>p.productId!=productId);
                 localStorage.setItem('cart',JSON.stringify(data));
                 cartData.value = JSON.parse(localStorage.getItem('cart'));
+                toastMgs('success');
+            }
+            const toastMgs = (mgsType)=>{
+                if(mgsType=='info'){
+                toast.mgs = "Already available"
+                toast.type = mgsType
+                }
+                else if(mgsType=='success'){
+                toast.mgs = "Successfully added"
+                toast.type = mgsType
+                }
+                else if(mgsType=='error'){
+                toast.mgs = "Error"
+                toast.type = mgsType
+                }
+                setTimeout(()=>{
+                toast.mgs = ""
+                toast.type = ''
+                },5000)
             }    
             // onMounted(()=>{
             //     cartData
             // });
             return{
+                ...toRefs(toast),
                 changeQuantity,
                 deleteFromCart,
                 cartData
@@ -89,11 +116,6 @@
 <style>
     .cart-product{
         max-width: 800px;
-        /* display: flex;
-        flex-wrap:wrap;
-        row-gap:10px;
-        column-gap:10px;
-        margin-top: 20px; */
     }
     .cart-thumpnale{
         width: 100px;
@@ -107,4 +129,24 @@
     .quantity{
         width: 150px;
     }
+    .toast-wrapper{
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .toast-mgs{
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        border-radius:5px 
+    }
+    .toast-mgs p{
+        padding: 20px 20px;
+        color: white;
+        margin-bottom: 0;
+    }
+    .success{
+        background-color: rgb(12, 139, 12);
+    }
+    
 </style>
