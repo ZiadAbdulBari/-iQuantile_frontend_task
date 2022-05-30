@@ -43,6 +43,11 @@ import { useRoute, useRouter } from 'vue-router';
             let product = ref(JSON.parse(localStorage.getItem('allProducts')))
             let searchProducts = ref([]);
             let cart = ref([]);
+            let categories = ref([]);
+
+            // const getCategory = ()=>{
+            //     categories.value = searchProducts.value.filter(cat=>categories.value.includes(cat.category))
+            // }
 
             const searchProduct = ()=>{
                 searchProducts.value = product.value.filter(p=>p.title.toLowerCase().includes(searchkey.value.toLowerCase()))
@@ -66,12 +71,14 @@ import { useRoute, useRouter } from 'vue-router';
             }
             onMounted(()=>{
                 searchProduct();
+                // getCategory();
             })
             return{
                 addToCart,
                 searchkey,
                 product,
                 searchProducts,
+                categories,
             }
         }
     }

@@ -27,18 +27,23 @@
 
     </div>
     <div class="all-product">
-    <div v-for="(product,i) in getProductData" :key="i">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" :src="product.photoUrl" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{product.title}}</h5>
-          <!-- <p class="card-text">{{product.description}}</p> -->
-          <p class="card-text">Category: {{product.category}}</p>
-          <p class="card-text">Price: {{product.price}}</p>
-          <button @click.prevent="addToCart(product)" class="btn border border-dark">Add to cart</button>
+      <div v-for="(product,i) in getProductData" :key="i">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" :src="product.photoUrl" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{product.title}}</h5>
+            <!-- <p class="card-text">{{product.description}}</p> -->
+            <p class="card-text">Category: {{product.category}}</p>
+            <p class="card-text">Price: {{product.price}}</p>
+            <button @click.prevent="addToCart(product)" class="btn border border-dark">Add to cart</button>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="toast-wrapper" v-if="mgs!=''">
+    <div class="toast-mgs" :class="{ 'success': type=='success','warning': type=='info'}">
+      <p>{{mgs}}</p>
     </div>
   </div>
   <Footer/>
@@ -46,7 +51,7 @@
 </template>
 
 <script>
-  import {ref,computed, onMounted} from 'vue';
+  import {ref,computed, onMounted, reactive, toRefs} from 'vue';
   import { useStore } from 'vuex'
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
@@ -55,7 +60,10 @@ import Footer from '../components/Footer.vue';
     setup(){
       const store = useStore()
       let cart = ref([]);
-
+      let toast = reactive({
+        mgs:'',
+        type:'',
+      })
       const getProductData = computed(()=>{
         return store.state.allProducts;
       })
@@ -65,17 +73,40 @@ import Footer from '../components/Footer.vue';
         if(cart.value.length>0){
           const isAvailable = cart.value.find((p)=>p.productId==product.productId)
           if(isAvailable){
-            console.log("Already available");
+            toastMgs('info');
+            // toast.mgs = "Already available"
+            // toast.type = "info"
+            // console.log("Already available");
           }
           else{
             cart.value.push(product);
             localStorage.setItem('cart',JSON.stringify(cart.value))
+            // toast.mgs = "Successfully added"
+            // toast.type = "success"
+            toastMgs('success');
           }
         }
         else{
           cart.value.push(product);
           localStorage.setItem('cart',JSON.stringify(cart.value))
+          // toast.mgs = "Successfully added"
+          // toast.type = "success"
+          toastMgs('success');
         }
+      }
+      const toastMgs = (mgsType)=>{
+        if(mgsType=='info'){
+          toast.mgs = "Already available"
+          toast.type = mgsType
+        }
+        else if(mgsType=='success'){
+          toast.mgs = "Successfully added"
+          toast.type = mgsType
+        }
+        setTimeout(()=>{
+          toast.mgs = ""
+          toast.type = ''
+        },5000)
       }
       onMounted(()=>{
         store.dispatch('setProductData');
@@ -83,6 +114,7 @@ import Footer from '../components/Footer.vue';
         
       })
       return{
+        ...toRefs(toast),
         addToCart,
         getProductData,
       }
@@ -101,5 +133,27 @@ import Footer from '../components/Footer.vue';
 .card-img-top{
   width:286px;
   height: 191px;
+}
+.toast-wrapper{
+ width: 100%;
+ height: auto;
+ position: relative;
+}
+.toast-mgs{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  border-radius:5px 
+}
+.toast-mgs p{
+  padding: 20px 20px;
+  color: white;
+  margin-bottom: 0;
+}
+.success{
+  background-color: rgb(12, 139, 12);
+}
+.warning{
+  background-color: rgb(222, 145, 0);
 }
 </style>
