@@ -88,7 +88,7 @@ import Header from '../components/Header.vue';
               return false
             }
             userSignup.id=1;
-            store.commit('setUserInfo');
+            store.commit('setProfileData');
             localStorage.setItem('userData',JSON.stringify(userSignup));
             localStorage.setItem('isLoggedin',JSON.stringify(true));
             const cart = ref([])
@@ -100,7 +100,7 @@ import Header from '../components/Header.vue';
           }
           // onMounted(()=>{
           //   test()
-          //   })
+          // })
           return{
             ...toRefs(userSignup),
             ...toRefs(errorMgs),

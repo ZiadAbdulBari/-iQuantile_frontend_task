@@ -114,13 +114,15 @@ const store = createStore({
         setProductData({commit}){
             commit('setProductDataToLocalStorage');
         },
-
+        getProfileData({commit}){
+            commit('setProfileData');
+        }
     },
     mutations: {
         setProductDataToLocalStorage(state){
             localStorage.setItem('allProducts',JSON.stringify(state.allProducts))
         },
-        setUserInfo(state) {
+        setProfileData(state) {
             let data = JSON.parse(localStorage.getItem('userData'));
             state.userSignup = data;
         },
