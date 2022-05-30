@@ -49,14 +49,17 @@
 <script>
     import Header from '../components/Header.vue';
     import {onMounted, ref,reactive,toRefs} from 'vue';
+import { useRouter } from 'vue-router';
     export default {
         components: { Header },
         setup(){
+            const router = useRouter()
             let cartData = ref([]);
             let toast = reactive({
                 mgs:'',
                 type:'',
             })
+            let isLoggedin = ref(JSON.parse(localStorage.getItem('isLoggedin')));
             cartData.value = JSON.parse(localStorage.getItem('cart'));
             
             const changeQuantity=(status,productId,quantity)=>{
@@ -100,14 +103,19 @@
                 toast.type = ''
                 },5000)
             }    
-            // onMounted(()=>{
-            //     cartData
-            // });
+            onMounted(()=>{
+               if(!isLoggedin.value){
+                   router.push({
+                       name:'home',
+                   })
+               } 
+            });
             return{
                 ...toRefs(toast),
                 changeQuantity,
                 deleteFromCart,
-                cartData
+                cartData,
+                isLoggedin
             }
         }
     }

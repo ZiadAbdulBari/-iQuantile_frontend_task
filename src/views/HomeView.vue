@@ -42,7 +42,7 @@
     </div>
   </div>
   <div class="toast-wrapper" v-if="mgs!=''">
-    <div class="toast-mgs" :class="{ 'success': type=='success','warning': type=='info'}">
+    <div class="toast-mgs" :class="{ 'success': type=='success','warning': type=='info','error': type=='error'}">
       <p>{{mgs}}</p>
     </div>
   </div>
@@ -64,19 +64,21 @@ import Footer from '../components/Footer.vue';
         mgs:'',
         type:'',
       })
+      let isLoggedin = ref(JSON.parse(localStorage.getItem('isLoggedin')));
       const getProductData = computed(()=>{
         return store.state.allProducts;
       })
 
       const addToCart = (product)=>{
+        if(!isLoggedin.value){
+          toastMgs('error');
+          return;
+        } 
         cart.value=JSON.parse(localStorage.getItem('cart'))
         if(cart.value.length>0){
           const isAvailable = cart.value.find((p)=>p.productId==product.productId)
           if(isAvailable){
             toastMgs('info');
-            // toast.mgs = "Already available"
-            // toast.type = "info"
-            // console.log("Already available");
           }
           else{
             cart.value.push(product);
@@ -100,16 +102,17 @@ import Footer from '../components/Footer.vue';
           toast.type = mgsType
         }
         else if(mgsType=='error'){
-          toast.mgs = "Error"
+          toast.mgs = "Please log in."
           toast.type = mgsType
         }
         setTimeout(()=>{
           toast.mgs = ""
           toast.type = ''
-        },5000)
+        },4000)
       }
       onMounted(()=>{
         store.dispatch('setProductData');
+        store.dispatch('getProfileData');
         
         
       })
@@ -117,6 +120,7 @@ import Footer from '../components/Footer.vue';
         ...toRefs(toast),
         addToCart,
         getProductData,
+        isLoggedin
       }
     }
   }
@@ -155,5 +159,8 @@ import Footer from '../components/Footer.vue';
 }
 .warning{
   background-color: rgb(222, 145, 0);
+}
+.error{
+  background-color: rgb(165, 29, 11);
 }
 </style>
