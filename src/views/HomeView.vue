@@ -27,7 +27,7 @@
 
     </div>
     <div class="all-product">
-    <div v-for="(product,i) in data" :key="i">
+    <div v-for="(product,i) in getProductData" :key="i">
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" :src="product.photoUrl" alt="Card image cap">
         <div class="card-body">
@@ -54,13 +54,11 @@ import Footer from '../components/Footer.vue';
   components: { Header, Footer },
     setup(){
       const store = useStore()
-      let data=ref([]);
       let cart = ref([]);
 
-      const getProductData = ()=>{
-        store.dispatch('setProductData');
-        data.value = JSON.parse(localStorage.getItem('allProducts'));
-      }
+      const getProductData = computed(()=>{
+        return store.state.allProducts;
+      })
 
       const addToCart = (product)=>{
         cart.value=JSON.parse(localStorage.getItem('cart'))
@@ -80,12 +78,13 @@ import Footer from '../components/Footer.vue';
         }
       }
       onMounted(()=>{
-        getProductData();
+        store.dispatch('setProductData');
+        
         
       })
       return{
-        data,
         addToCart,
+        getProductData,
       }
     }
   }
