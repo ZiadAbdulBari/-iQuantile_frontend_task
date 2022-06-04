@@ -25,7 +25,7 @@
           <div id="emailHelp" class="form-text text-danger" v-if="confirmPasswordError!=''">{{confirmPasswordError}}</div>
         </div>
         <div class="text-center">
-          <button @click.prevent="signup()" type="submit" class="btn border-dark">Signup</button>
+          <button @click.prevent="signup()" type="submit" class="btn btn-primary">Signup</button>
         </div>
       </form>
     </div>
@@ -111,5 +111,12 @@ import Header from '../components/Header.vue';
 </script>
 
 <style>
-
+.btn-primary{
+    background-color: #D61C4E !important;
+    border: transparent;
+}
+.btn-primary:focus{
+    box-shadow: none;
+    border: transparent;
+}
 </style>

@@ -1,7 +1,8 @@
 <template>
 <div>
   <Header/>
-  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  
+  <!-- <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="../assets/images/banner2.avif" class="d-block" alt="..." style="width:100vw;height:95vh">
@@ -21,11 +22,10 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-  </div>
-  <div class="container">
-    <div class="category">
-
-    </div>
+  </div> -->
+  <div class="container mx-auto">
+    <!-- <div class="category">
+    </div> -->
     <div class="all-product">
       <div v-for="(product,i) in getProductData" :key="i">
         <div class="card" style="width: 18rem;">

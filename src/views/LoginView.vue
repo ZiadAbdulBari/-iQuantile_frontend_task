@@ -3,19 +3,26 @@
     <Header/>
     <div class="container">
         <div class="wrapper m-auto">
-            <form>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text text-danger" v-if="emailError!=''">{{emailError}}</div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
-                    <div id="emailHelp" class="form-text text-danger" v-if="passwordError!=''">{{passwordError}}</div>
-                </div>
-                <button type="submit" @click.prevent="login()" class="btn btn-primary">Submit</button>
-            </form>
+            <div class="alert alert-danger" role="alert" v-if="isUserDataFound===false">
+                {{mgs}}
+            </div>
+            <div class="login-form">
+                <form @submit="login">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text text-danger" v-if="emailError!=''">{{emailError}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
+                        <div id="emailHelp" class="form-text text-danger" v-if="passwordError!=''">{{passwordError}}</div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" @click.prevent="login()" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -25,39 +32,50 @@
     import { ref,reactive,toRefs } from '@vue/reactivity'
     import { useRouter, useRoute } from 'vue-router'
     import { useStore } from 'vuex';
-
     import Header from '../components/Header.vue';
     export default {
   components: { Header },
-
         setup(){
             let email = ref('');
             let password = ref('');
+            let mgs = ref('');
             let userData = JSON.parse(localStorage.getItem('userData'));
+            let isUserDataFound = ref(true);
             let errorMgs=reactive({
-            emailError:'',
-            passwordError:'',
-          })
+                emailError:'',
+                passwordError:'',
+            })
             const router = useRouter()
             const route = useRoute()
             const store = useStore()
             const signinFormValidation = ()=>{
-                if(userData.email!=email.value){
-                    errorMgs.emailError = 'Invalid email.';
-                    return false;
-                }
-                if(userData.password!=password.value){
-                    errorMgs.passwordError = 'Invalid password.';
-                    return false;
+                if(userData!=null){
+                    isUserDataFound.value = true;
+                    if(userData.email!=email.value){
+                        errorMgs.emailError = 'Invalid email.';
+                        return false;
+                    }
+                    if(userData.password!=password.value){
+                        errorMgs.passwordError = 'Invalid password.';
+                        return false;
+                    }
+                    else{
+                        return true
+                    }
                 }
                 else{
-                    return true
+                    console.log("Wrong credincial")
+                    isUserDataFound.value = false;
+                    mgs.value = "Wrong credincial";
+
+                    return;
                 }
             }
             const login = ()=>{
                 if(!signinFormValidation()){
                     return false;
                 }
+                
                 localStorage.setItem('isLoggedin',JSON.stringify(true));
                 store.dispatch('setProductData');
                 const cart = ref([])
@@ -65,6 +83,7 @@
                 router.push({
                     name:'home'
                 })
+                
             }
             return{
                 ...toRefs(errorMgs),
@@ -78,7 +97,25 @@
 </script>
 
 <style>
+/* .login-form{
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform: translate(-50%,-50%);
+    width:500px;
+} */
 .wrapper{
-    max-width:600px;
+    /* position: relative; */
+    width:500px;
+    /* width: 100%;
+    height: 100vh; */
+}
+.btn-primary{
+    background-color: #D61C4E !important;
+    border: transparent;
+}
+.btn-primary:focus{
+    box-shadow: none;
+    border: transparent;
 }
 </style>
