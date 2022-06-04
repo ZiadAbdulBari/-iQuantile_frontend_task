@@ -9,5 +9,6 @@ module.exports = {
     //   'sans':'Open_Sans',
     // }
   },
-  plugins: [],
+  plugins: [
+]
 }

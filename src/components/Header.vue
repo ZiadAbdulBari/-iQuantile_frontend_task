@@ -1,5 +1,5 @@
 <template>
-    <div class="sticky top-0 bg-gray-50 pt-3 pb-3">
+    <div class="sticky top-0 bg-gray-50 pt-3 pb-3 z-10">
         <div class="container mx-auto">
             <div class="flex justify-between items-center">
                 <router-link to="/">
@@ -39,7 +39,7 @@
                                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                             </svg>
                         </div>
-                        <div class="dropdown-content">
+                        <div class="dropdown-content leading-9">
                             <router-link to="/update" class="block" aria-current="page">Update Profile</router-link>
                             <a class="block" href="#" aria-current="page" @click.prevent="signout()">Signout</a>
                         </div>
@@ -103,9 +103,6 @@ import { useRouter } from 'vue-router';
         display: inline-block;
     }
     .avater{
-        background-color: white;
-        height: 40px;
-        width: 40px;
         border-radius: 100%;
         text-align: center;
     }
