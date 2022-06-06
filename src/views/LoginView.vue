@@ -1,9 +1,12 @@
 <template>
 <div>
-    <Header/>
+    <!-- <Header/> -->
     <div class="container mx-auto">
         <div class="flex justify-center items-center h-screen">
             <div class="wrapper bg-gray-100 p-8">
+                <div class="mb-8">
+                    <img src="../assets/images/logo.png" alt="" style="max-width:150px;" class="mx-auto">
+                </div>
                 <div class="alert alert-danger" role="alert" v-if="isUserDataFound===false">
                     {{mgs}}
                 </div>
@@ -22,6 +25,7 @@
                         <div class="mt-8 text-center">
                             <button type="submit" @click.prevent="login()" class="bg-[#D61C4E] px-8 py-1 rounded text-white">Submit</button>
                         </div>
+                        <p class="mt-4 font-semibold text-center">If you have no account, please <router-link to="/registration" class="text-[#D61C4E]">signup</router-link></p>
                     </form>
                 </div>
             </div>
@@ -34,9 +38,9 @@
     import { ref,reactive,toRefs } from '@vue/reactivity'
     import { useRouter, useRoute } from 'vue-router'
     import { useStore } from 'vuex';
-    import Header from '../components/Header.vue';
+    // import Header from '../components/Header.vue';
     export default {
-  components: { Header },
+//   components: { Header },
         setup(){
             let email = ref('');
             let password = ref('');
