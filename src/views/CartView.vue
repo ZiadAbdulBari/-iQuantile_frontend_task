@@ -1,24 +1,24 @@
 <template>
 <div>
     <Header/>
-    <div class="container">
-        <div class="cart-product m-auto mt-2">
+    <div class="container mx-auto">
+        <div class="cart-product mt-5">
             <div v-for="(data,i) in cartData" :key="i">
-                <div class="d-flex justify-content-between align-self-center ps-4 pe-4 pt-4 pb-4 bg-light mb-2 rounded">
+                <div class="flex items-center justify-between rounded w-500 bg-gray-50 px-5 py-5 mb-5">
                     <div class="cart-thumpnale">
                         <img :src="data.photoUrl" alt="" class="rounded">
                     </div>
                     <div class="product-name">
                         <h5>{{data.title}}</h5>
                     </div>
-                    <div class="d-flex quantity">
+                    <div class="flex quantity">
                         <div>
                             <button @click.prevent="changeQuantity('increment',data.productId,data.quentity)">
                                 +
                             </button>
                         </div>
                         <div>
-                            <input type="text" :value="data.quentity" style="width:40px;text-align:center">
+                            <input type="text" :value="data.quentity" style="width:40px;text-align:center" class="rounded-md border focus:outline-none border-solid border-slate-300 mx-3" readonly>
                         </div>
                         <div>
                             <button @click.prevent="changeQuantity('decrement',data.productId,data.quentity)">
