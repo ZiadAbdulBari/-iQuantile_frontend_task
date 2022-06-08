@@ -1,33 +1,32 @@
 <template>
-    <div class="container">
-        <div class="d-flex justify-content-between">
-            <div class="profile-info">
-                <p><span>Name: </span>{{profileData.name}}</p>
-                <p><span>Email: </span>{{profileData.email}}</p>
-                <p><span>Address: </span>{{profileData.address}}</p>
-                <p><span>Contact: </span>{{profileData.contactNumber}}</p>
+    <Header/>
+    <div class="container mx-auto">
+        <div class="flex items-center justify-center h-screen gap-10">
+            <div class="">
+                <div class="bg-black h-40 w-40"></div>
             </div>
-            <div class="profile-update">
+            <div class="">
                 <form @submit="updateProfile()">
-                    <div class="d-flex justify-content-between ">
-                        <div class="mb-3 product-id">
-                            <label for="exampleInputEmail1" class="form-label">Name</label>
-                            <input type="text" v-model="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3 category">
-                            <label for="exampleInputPassword1" class="form-label">Email</label>
-                            <input type="email" v-model="email" class="form-control" id="exampleInputPassword1" readonly>
-                        </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="block mb-3">Name</label>
+                        <input type="text" v-model="name" class="rounded-md border focus:outline-none border-solid border-slate-300 h-10 w-[500px] p-5" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Address</label>
-                        <input type="text" v-model="address" class="form-control" id="exampleInputPassword1">
+                        <label for="exampleInputPassword1" class="block mb-3">Email</label>
+                        <input type="email" v-model="email" class="rounded-md border focus:outline-none border-solid border-slate-300 h-10 w-[500px] p-5" id="exampleInputPassword1" readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Contact Number</label>
-                        <input type="text" v-model="contactNumber" class="form-control" id="exampleInputPassword1">
+                        <label for="exampleInputPassword1" class="block mb-3">Address</label>
+                        <input type="text" v-model="address" class="rounded-md border focus:outline-none border-solid border-slate-300 h-10 w-[500px] p-5" id="exampleInputPassword1">
                     </div>
-                    <button type="submit" class="btn btn-primary" @click.prevent="updateProfile()">Update Product</button>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="block mb-3">Contact Number</label>
+                        <input type="text" v-model="contactNumber" class="rounded-md border focus:outline-none border-solid border-slate-300 h-10 w-[500px] p-5" id="exampleInputPassword1">
+                    </div>
+                    <div class="mt-8 text-center">
+                            <!-- <button type="submit" @click.prevent="login()" class="bg-[#D61C4E] px-8 py-1 rounded text-white">Submit</button> -->
+                            <button type="submit" class="bg-[#D61C4E] px-8 py-1 rounded text-white" @click.prevent="updateProfile()">Update Product</button>
+                    </div>
                     
                 </form>
             </div>
@@ -39,7 +38,9 @@
 import { computed, onMounted, ref,reactive, toRefs } from '@vue/runtime-core'
   import { useStore } from 'vuex'
     import { useRouter, useRoute } from 'vue-router'
+import Header from '../components/Header.vue'
     export default {
+  components: { Header },
         setup(){
             const store = useStore()
             const route = useRoute();
