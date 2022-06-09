@@ -15,12 +15,12 @@
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="">Email address</label>
                             <input v-model="email" type="email" class="mt-3 w-full rounded-md border focus:outline-none border-solid border-slate-300 h-10 p-5" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <div id="emailHelp" class="" v-if="emailError!=''">{{emailError}}</div>
+                            <div id="emailHelp" class="text-rose-500" v-if="emailError!=''">*{{emailError}}</div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="">Password</label>
                             <input v-model="password" type="password" class="mt-3 w-full rounded-md border focus:outline-none border-solid border-slate-300 h-10 p-5" id="exampleInputPassword1">
-                            <div id="emailHelp" class="" v-if="passwordError!=''">{{passwordError}}</div>
+                            <div id="emailHelp" class="text-rose-500" v-if="passwordError!=''">*{{passwordError}}</div>
                         </div>
                         <div class="mt-8 text-center">
                             <button type="submit" @click.prevent="login()" class="bg-[#D61C4E] px-8 py-1 rounded text-white">Submit</button>
