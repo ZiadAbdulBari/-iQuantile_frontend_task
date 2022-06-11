@@ -1,33 +1,21 @@
 <template>
-    <div class="container">
-        <div class="d-flex">
+    <div class="container mx-auto">
+        <div class="flex">
             <div class="category bg-light p-2">
                 <div>
-                    <input type="checkbox" id="cat-1" class="me-2">
+                    <input type="checkbox" id="cat-1" class="mr-2">
                     <label for="cat-1">Kids</label>
                 </div>
                 <div>
-                    <input type="checkbox" id="cat-2" class="me-2">
+                    <input type="checkbox" id="cat-2" class="mr-2">
                     <label for="cat-2">Women</label>
                 </div>
                 <div>
-                    <input type="checkbox" id="cat-3" class="me-2">
+                    <input type="checkbox" id="cat-3" class="mr-2">
                     <label for="cat-3">Men</label>
                 </div>
             </div>
-            <div class="search-item">
-                <div class="search-product">
-                    <div class="card" style="width: 18rem;" v-for="(product,i) in searchProducts" :key="i">
-                        <img class="card-img-top" :src="product.photoUrl" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{product.title}}</h5>
-                            <p class="card-text">Category: {{product.category}}</p>
-                            <p class="card-text">Price: {{product.price}}</p>
-                            <button @click.prevent="addToCart(product)" class="btn border border-dark">Add to cart</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ProductCard :products="searchProducts" />
         </div>
     </div>
 </template>
@@ -35,7 +23,9 @@
 <script>
     import {onMounted, ref,} from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import ProductCard from './ProductCard.vue';
     export default {
+  components: { ProductCard },
         setup(){
             const router = useRouter()
             const route = useRoute()
