@@ -2,18 +2,11 @@
     <div class="container mx-auto">
         <div class="flex">
             <div class="category bg-light p-2">
-                <div>
-                    <input type="checkbox" id="cat-1" class="mr-2">
-                    <label for="cat-1">Kids</label>
+                <div v-for="(cat,i) in categories" :key="i">
+                    <input type="checkbox" :id="cat" class="mr-2" @change="searchProduct(cat)">
+                    <label :for="cat">{{cat}}</label>
                 </div>
-                <div>
-                    <input type="checkbox" id="cat-2" class="focus:outline-none focus:border-sky-500 mr-2">
-                    <label for="cat-2">Women</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="cat-3" class="mr-2">
-                    <label for="cat-3">Men</label>
-                </div>
+                
             </div>
             <ProductCard :products="searchProducts" />
         </div>
@@ -22,8 +15,8 @@
 
 <script>
     import {onMounted, ref,} from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import ProductCard from './ProductCard.vue';
+    import { useRoute, useRouter } from 'vue-router';
+    import ProductCard from './ProductCard.vue';
     export default {
   components: { ProductCard },
         setup(){
@@ -34,13 +27,24 @@ import ProductCard from './ProductCard.vue';
             let searchProducts = ref([]);
             let cart = ref([]);
             let categories = ref([]);
+            let category=ref('');
 
-            // const getCategory = ()=>{
-            //     categories.value = searchProducts.value.filter(cat=>categories.value.includes(cat.category))
-            // }
+            const getCategory = ()=>{
+                for(let cat of searchProducts.value){
+                    // categories.value = categories.value.filter(c=>c!=)
+                    if( categories.value.indexOf(cat.category)==-1){
+                        categories.value.push(cat.category);
+                    }
+                }
+            }
 
-            const searchProduct = ()=>{
-                searchProducts.value = product.value.filter(p=>p.title.toLowerCase().includes(searchkey.value.toLowerCase()))
+            const searchProduct = (cat)=>{
+                if(!cat){
+                    searchProducts.value = product.value.filter(p=>p.title.toLowerCase().includes(searchkey.value.toLowerCase()))
+                }
+                if(cat){
+                    console.log(cat);
+                }
             }
             const addToCart = (product)=>{
                 cart.value =JSON.parse(localStorage.getItem('cart'))
@@ -61,14 +65,17 @@ import ProductCard from './ProductCard.vue';
             }
             onMounted(()=>{
                 searchProduct();
-                // getCategory();
+                getCategory();
             })
             return{
                 addToCart,
+                searchProducts,
+                searchProduct,
+                
                 searchkey,
                 product,
-                searchProducts,
                 categories,
+                category,
             }
         }
     }
