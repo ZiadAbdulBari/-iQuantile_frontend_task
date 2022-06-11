@@ -1,70 +1,35 @@
 <template>
 <div>
   <Header/>
-  <div id="carouselExampleControls" class="carousel slide relative carousel-fade" data-bs-ride="carousel" data-carousel="slide">
-  <div class="carousel-inner relative w-full overflow-hidden">
-    <div class="carousel-item active relative float-left w-full">
-      <img
-        src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp"
-        class="block w-full"
-        alt="Wild Landscape"
-      />
+  
+  <div id="controls-carousel" class="relative" data-carousel="slide">
+    <div class="overflow-hidden relative h-[70vh] sm:h-64 xl:h-80 2xl:h-[70vh] z-0">
+      <div class="duration-700 ease-in-out absolute inset-0 transition-all transform -translate-x-full z-10" data-carousel-item="active">
+      <img src="https://images.unsplash.com/photo-1502715837142-58627c477625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
+      </div>
+
+      <div class="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-0 z-20" data-carousel-item="active">
+      <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
+      </div>
+
+      <div class="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-full z-10" data-carousel-item="active">
+      <img src="https://images.unsplash.com/photo-1490247646175-cff5220d08b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
+      </div>
+
+      <!-- <div class="hidden duration-700 ease-in-out absolute inset-0 transition-all transform" data-carousel-item="">
+      <img src="/docs/images/carousel/carousel-4.svg" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
+      </div>
+
+      <div class="hidden duration-700 ease-in-out absolute inset-0 transition-all transform" data-carousel-item="">
+      <img src="/docs/images/carousel/carousel-5.svg" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
+      </div> -->
     </div>
-    <div class="carousel-item relative float-left w-full">
-      <img
-        src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp"
-        class="block w-full"
-        alt="Camera"
-      />
-    </div>
-    <div class="carousel-item relative float-left w-full">
-      <img
-        src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp"
-        class="block w-full"
-        alt="Exotic Fruits"
-      />
+    <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
+      <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+      <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+      <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
     </div>
   </div>
-  <button
-    class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
-    type="button"
-    data-bs-target="#carouselExampleControls"
-    data-bs-slide="prev"
-  >
-    <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button
-    class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
-    type="button"
-    data-bs-target="#carouselExampleControls"
-    data-bs-slide="next"
-  >
-    <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-  <!-- <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="../assets/images/banner2.avif" class="d-block" alt="..." style="width:100vw;height:95vh">
-      </div>
-      <div class="carousel-item">
-        <img src="../assets/images/banner.avif" class="d-block" alt="..." style="width:100vw;height:95vh">
-      </div>
-      <div class="carousel-item">
-        <img src="../assets/images/banner3.avif" class="d-block" alt="..." style="width:100vw;height:95vh">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div> -->
   <div class="container mx-auto">
     <ProductCard :products="getProductData" />
   </div>

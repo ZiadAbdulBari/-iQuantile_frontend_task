@@ -7,7 +7,7 @@
                     <label for="cat-1">Kids</label>
                 </div>
                 <div>
-                    <input type="checkbox" id="cat-2" class="mr-2">
+                    <input type="checkbox" id="cat-2" class="focus:outline-none focus:border-sky-500 mr-2">
                     <label for="cat-2">Women</label>
                 </div>
                 <div>

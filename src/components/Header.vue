@@ -1,5 +1,5 @@
 <template>
-    <div class="sticky top-0 bg-gray-50 pt-3 pb-3 z-10">
+    <div class="sticky z-10 top-0 bg-gray-50 pt-3 pb-3 z-10">
         <div class="container mx-auto">
             <div class="flex justify-between items-center">
                 <router-link to="/">
