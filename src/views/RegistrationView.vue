@@ -10,22 +10,22 @@
         <form>
           <div class="">
             <label for="exampleInputEmail1" class="">Name</label>
-            <input v-model="name" type="text" class="mt-3 mb-3 w-full rounded-md border focus:outline-none border-solid border-slate-300 h-10 p-5" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input v-model="name" type="text" class="mt-3 mb-3 w-full rounded-md border focus:outline-none focus:ring-0 focus:border-[#D61C4E] border-solid border-slate-300 h-10 p-5" id="exampleInputEmail1" aria-describedby="emailHelp">
             <div id="emailHelp" class="text-rose-500" v-if="nameError!=''">*{{nameError}}</div>
           </div>
           <div class="">
             <label for="exampleInputEmail1" class="">Email</label>
-            <input  v-model="email" type="email" class="mt-3 mb-3 w-full rounded-md border focus:outline-none border-solid border-slate-300 h-10 p-5" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input  v-model="email" type="email" class="mt-3 mb-3 w-full rounded-md border focus:outline-none focus:ring-0 focus:border-[#D61C4E] border-solid border-slate-300 h-10 p-5" id="exampleInputEmail1" aria-describedby="emailHelp">
             <div id="emailHelp" class="text-rose-500" v-if="emailError!=''">*{{emailError}}</div>
           </div>
           <div class="">
             <label for="exampleInputPassword1" class="">Password</label>
-            <input v-model="password" type="password" class="mt-3 mb-3 w-full rounded-md border focus:outline-none border-solid border-slate-300 h-10 p-5" id="exampleInputPassword1">
+            <input v-model="password" type="password" class="mt-3 mb-3 w-full rounded-md border focus:outline-none focus:ring-0 focus:border-[#D61C4E] border-solid border-slate-300 h-10 p-5" id="exampleInputPassword1">
             <div id="emailHelp" class="text-rose-500" v-if="passwordError!=''">*{{passwordError}}</div>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="">Confirm Password</label>
-            <input v-model="confirmPassword" type="password" class="mt-3 w-full rounded-md border focus:outline-none border-solid border-slate-300 h-10 p-5" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input v-model="confirmPassword" type="password" class="mt-3 w-full rounded-md border focus:outline-none focus:ring-0 focus:border-[#D61C4E] border-solid border-slate-300 h-10 p-5" id="exampleInputEmail1" aria-describedby="emailHelp">
             <div id="emailHelp" class="text-rose-500" v-if="confirmPasswordError!=''">*{{confirmPasswordError}}</div>
           </div>
           <div class="mt-8 text-center">
