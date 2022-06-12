@@ -28,7 +28,7 @@
             let cart = ref([]);
             let categories = ref([]);
             let category=ref('');
-
+            let selectedCat = ref([]);
             const getCategory = ()=>{
                 for(let cat of searchProducts.value){
                     // categories.value = categories.value.filter(c=>c!=)
@@ -43,6 +43,7 @@
                     searchProducts.value = product.value.filter(p=>p.title.toLowerCase().includes(searchkey.value.toLowerCase()))
                 }
                 if(cat){
+                    selectedCat.value=[...selectedCat.value,cat];
                     console.log(cat);
                 }
             }
@@ -76,6 +77,7 @@
                 product,
                 categories,
                 category,
+                selectedCat
             }
         }
     }
