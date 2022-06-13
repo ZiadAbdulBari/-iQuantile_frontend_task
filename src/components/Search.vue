@@ -8,7 +8,7 @@
                 </div>
                 
             </div>
-            <ProductCard :products="searchProducts" />
+            <ProductCard :products="filteredProduct.length>0?filteredProduct:searchProducts" />
         </div>
     </div>
 </template>
@@ -28,7 +28,9 @@
             let cart = ref([]);
             let categories = ref([]);
             let category=ref('');
-            let selectedCat = ref([]);
+            let selectedCategory = ref([]);
+            let filteredProduct = ref([]);
+
             const getCategory = ()=>{
                 for(let cat of searchProducts.value){
                     // categories.value = categories.value.filter(c=>c!=)
@@ -39,12 +41,23 @@
             }
 
             const searchProduct = (cat)=>{
+                filteredProduct.value=[];
                 if(!cat){
                     searchProducts.value = product.value.filter(p=>p.title.toLowerCase().includes(searchkey.value.toLowerCase()))
                 }
                 if(cat){
-                    selectedCat.value=[...selectedCat.value,cat];
-                    console.log(cat);
+                    selectedCategory.value=[...selectedCategory.value,cat];
+                    filteredProduct.value=[];
+                    for(let selectedCat of selectedCategory.value){
+                        let product;
+                        product = searchProducts.value.filter(p=>p.category==selectedCat)
+                        for(let p of product){
+                            filteredProduct.value = [...filteredProduct.value,p];
+                        }
+                    }
+                    // console.log(filteredProduct.value);
+                    // searchProducts.value=filteredProduct.value
+                    // console.log(cat);
                 }
             }
             const addToCart = (product)=>{
@@ -77,7 +90,8 @@
                 product,
                 categories,
                 category,
-                selectedCat
+                selectedCategory,
+                filteredProduct,
             }
         }
     }
