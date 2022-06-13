@@ -34,7 +34,6 @@
 
             const getCategory = ()=>{
                 for(let cat of searchProducts.value){
-                    // categories.value = categories.value.filter(c=>c!=)
                     if( categories.value.indexOf(cat.category)==-1){
                         categories.value.push(cat.category);
                     }
@@ -62,9 +61,6 @@
                             filteredProduct.value = [...filteredProduct.value,p];
                         }
                     }
-                    // console.log(filteredProduct.value);
-                    // searchProducts.value=filteredProduct.value
-                    // console.log(cat);
                 }
             }
             const addToCart = (product)=>{
