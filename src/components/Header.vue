@@ -7,7 +7,7 @@
                 </router-link>
                 <div class="w-3/5 relative">
                 <form @submit="searchProduct">
-                    <input v-model="searchKey" type="text" class="w-full rounded-md border focus:outline-none focus:ring-0 focus:border-[#D61C4E] border-solid border-slate-300 h-10 pl-5 pr-9 pt-2 pb-2 relative" placeholder="Find your product">
+                    <input v-model="searchKey" type="text" class="w-full rounded-md border focus:outline-none focus:ring-0 focus:border-[#D61C4E] border-solid border-slate-300 h-11 pl-5 pr-9 pt-2 pb-2 relative" placeholder="Find your product">
                     <button @click.prevent="searchProduct" class="search absolute bottom-0 right-0 bg-[#D61C4E] rounded-r-md" type="button" id="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -121,7 +121,7 @@ import { useRouter } from 'vue-router';
         display: block;
     }
     .search{
-        padding: 12px 11px;
+        padding: 14px 11px;
     }
     
 </style>

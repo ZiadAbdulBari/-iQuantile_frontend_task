@@ -3,7 +3,7 @@
         <div class="flex">
             <div class="category bg-light p-2">
                 <div v-for="(cat,i) in categories" :key="i">
-                    <input type="checkbox" :id="cat" class="mr-2" @change="searchProduct(cat)">
+                    <input type="checkbox" :id="cat" class="mr-2 rounded border focus:outline-none focus:ring-0 focus:border-[#D61C4E] checked:bg-[#D61C4E] border-solid border-slate-300" @click="searchProduct(cat)">
                     <label :for="cat">{{cat}}</label>
                 </div>
                 
@@ -41,6 +41,7 @@
             }
 
             const searchProduct = (cat)=>{
+                console.log(cat);
                 filteredProduct.value=[];
                 if(!cat){
                     searchProducts.value = product.value.filter(p=>p.title.toLowerCase().includes(searchkey.value.toLowerCase()))
