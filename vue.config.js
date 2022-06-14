@@ -1,0 +1,1 @@
+export const publicPath = '/e-buy-composition-api/';
